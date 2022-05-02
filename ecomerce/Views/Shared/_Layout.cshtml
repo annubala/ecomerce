@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+ 
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+
+    <script>
+
+
+        $(document).ready(function () {
+            $('#button').click(function () {
+                var name = $('#name').val();
+                if (name == '') {
+                    alert('name is empty')
+                    return false;
+
+
+                }
+                var email = $('#email').val();
+                if (email == '') {
+                    alert('email is empty')
+                    return false;
+                }
+                var password = $('#passInput').val();
+                if (password == '') {
+                    alert('password is empty')
+                    return false;
+                }
+
+
+
+                var city = $('#city').val();
+                if (city == '') {
+                    alert('city is empty')
+                    return false;
+
+
+                }
+                var mobile = $('#mobile').val();
+                if (mobile == '') {
+                    alert('mobile no is empty')
+                    return false;
+                }
+                var que = $('#que').val();
+                if (que == '') {
+                    alert('qualification is empty')
+                    return false;
+
+
+
+                }
+
+
+
+                var row = $('<tr></tr>')
+                var ceil1 = $('<td></td>').append($('#name').val());
+                var ceil2 = $('<td></td>').append($('#email').val());
+                var ceil3 = $('<td></td>').append($('#passInput').val());
+                var ceil4 = $('<td></td>').append($('#city').val());
+                var ceil5 = $('<td></td>').append($('#mobile').val());
+                var ceil6 = $('<td></td>').append($('#que').val());
+
+                var ceil7 = $('<td></td>').append('<button class="editbtn btn btn-success">Edit</button>');
+                var ceil8 = $('<td></td>').append('<button class="rbtn btn btn-success">Remove</button>');
+
+                row.append(ceil1).append(ceil2).append(ceil3).append(ceil4).append(ceil5).append(ceil6).append(ceil7).append(ceil8);
+                $('#myb').append(row);
+                $('input').val('');
+
+                $('.rbtn').bind('click', function () {
+                    $(this).closest('tr').remove();
+                });
+
+
+                $('.editbtn').click(function (event) {
+                    var row = $(event.currentTarget).closest('tr');
+                    $('#name').val(row.find('td:eq(0)').text());
+                    $('#email').val(row.find('td:eq(1)').text());
+                    $('#passInput').val(row.find('td:eq(2)').text());
+                    $('#city').val(row.find('td:eq(3)').text());
+                    $('#mobile').val(row.find('td:eq(4)').text());
+                    $('#que').val(row.find('td:eq(5)').text());
+                    $('#name').focus();
+                    $('.btnupdate').unbind().click(function () {
+                        row.find('td:eq(0)').text($('#name').val());
+                        row.find('td:eq(1)').text($('#email').val());
+                        row.find('td:eq(2)').text($('#passInput').val());
+                        row.find('td:eq(3)').text($('#city').val());
+                        row.find('td:eq(4)').text($('#mobile').val());
+                        row.find('td:eq(5)').text($('#que').val());
+                        row = null;
+
+
+
+                    });
+                });
+
+            });
+
+            $('#showPass').on('click', function () {
+                var passInput = $("#passInput");
+                if (passInput.attr('type') === 'password') {
+                    passInput.attr('type', 'text');
+                } else {
+                    passInput.attr('type', 'password');
+                }
+            });
+
+
+        });
+
+
+
+
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
